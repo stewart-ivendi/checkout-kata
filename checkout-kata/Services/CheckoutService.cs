@@ -15,7 +15,7 @@ public class CheckoutService : ICheckoutService
         var runningTotal = 0;
      
         foreach (var itemGroup in _basket.GroupBy(x => x).Select(x => (x.Key, x.Count())))
-            runningTotal += _priceRepository.GetStockItemRecord(itemGroup.Key)?.Price ?? 0 * itemGroup.Item2;
+            runningTotal += (_priceRepository.GetStockItemRecord(itemGroup.Key)?.Price ?? 0) * itemGroup.Item2;
 
         return runningTotal;
     }

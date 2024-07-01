@@ -33,8 +33,8 @@ public class PriceRepositoryTests
 
     #region data
 
-    private static StockItemRecord RecordA = new StockItemRecord { Sku = "A", Price = 50 };
-    private static StockItemRecord RecordB = new StockItemRecord { Sku = "B", Price = 30 };
+    private static StockItemRecord RecordA = new StockItemRecord { Sku = "A", Price = 50, OfferQuantity = 3, OfferPrice = 150 };
+    private static StockItemRecord RecordB = new StockItemRecord { Sku = "B", Price = 30, OfferQuantity = 2, OfferPrice = 45 };
     private static StockItemRecord RecordC = new StockItemRecord { Sku = "C", Price = 20 };
     private static StockItemRecord RecordD = new StockItemRecord { Sku = "D", Price = 10 };
 
