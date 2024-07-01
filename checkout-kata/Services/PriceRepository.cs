@@ -11,7 +11,7 @@ public class PriceRepository : IPriceRepository
     }
 
     public StockItemRecord GetStockItemRecord(string sku)
-    {
-        return null;
-    }
+        => _stockPrices.ContainsKey(sku) 
+                ? _stockPrices[sku]
+                : null;
 }
