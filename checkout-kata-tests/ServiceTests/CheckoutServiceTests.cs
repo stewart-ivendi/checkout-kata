@@ -4,7 +4,6 @@ public class CheckoutServiceTests
 {
     private readonly Mock<IPriceRepository> _priceRepository = new();
 
-
     [Fact]
     public void When_EmptyBasket_Then_TotalPrice_0()
     {
@@ -87,23 +86,19 @@ public class CheckoutServiceTests
     [InlineData("A", 5, 230)]
     [InlineData("A", 6, 260)]
     [InlineData("A", 7, 310)]
-
     [InlineData("B", 1, 30)]
     [InlineData("B", 2, 45)]
     [InlineData("B", 3, 75)]
     [InlineData("B", 4, 90)]
     [InlineData("B", 5, 120)]
-
     [InlineData("C", 1, 20)]
     [InlineData("C", 2, 40)]
     [InlineData("C", 3, 60)]
     [InlineData("C", 4, 80)]
-
     [InlineData("D", 1, 15)]
     [InlineData("D", 2, 30)]
     [InlineData("D", 3, 45)]
     [InlineData("D", 4, 60)]
-
     public void When_MultipleSameItem_Then_ExpectedPrice(string sku, int quantity, int expectedCost)
     {
         // ARRANGE
@@ -130,7 +125,6 @@ public class CheckoutServiceTests
 
         cost.Should().Be(expectedCost);
     }
-
 
     #region data
 

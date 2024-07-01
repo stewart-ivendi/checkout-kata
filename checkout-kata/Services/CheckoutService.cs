@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace checkout_kata.Services;
+﻿namespace checkout_kata.Services;
 
 public class CheckoutService : ICheckoutService
 {
