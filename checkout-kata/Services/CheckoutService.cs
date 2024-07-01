@@ -2,6 +2,13 @@
 
 public class CheckoutService : ICheckoutService
 {
+    private readonly IPriceRepository _priceRepository;
+
+    public CheckoutService(IPriceRepository priceRepository)
+    {
+        _priceRepository = priceRepository;
+    }
+
     public int GetTotalPrice()
     {
         return 0;
