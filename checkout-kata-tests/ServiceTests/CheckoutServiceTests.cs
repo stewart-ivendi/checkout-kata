@@ -19,7 +19,35 @@ public class CheckoutServiceTests
         // ASSERT
 
         result.Should().Be(0);
+    }
 
+    [Fact]
+    public void When_OnlyNonExistantItems_Then_TotalPrice_0()
+    {
+        // ARRANGE
+
+        // default behaviour : Unknown price
+        _priceRepository.Setup(x => x.GetStockItemRecord(It.IsAny<string>())).Returns((StockItemRecord)null);
+        // Specified Prices
+        _priceRepository.Setup(x => x.GetStockItemRecord("A")).Returns(RecordA);
+        _priceRepository.Setup(x => x.GetStockItemRecord("B")).Returns(RecordB);
+        _priceRepository.Setup(x => x.GetStockItemRecord("C")).Returns(RecordC);
+        _priceRepository.Setup(x => x.GetStockItemRecord("D")).Returns(RecordD);
+
+        var checkout = new CheckoutService(_priceRepository.Object);
+
+        // ACT
+
+        checkout.Scan("W");
+        checkout.Scan("X");
+        checkout.Scan("Y");
+        checkout.Scan("Z");
+
+        var cost = checkout.GetTotalPrice();
+
+        // ASSERT
+
+        cost.Should().Be(0);
     }
 
     [Fact]
