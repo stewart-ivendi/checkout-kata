@@ -3,6 +3,7 @@
 public class CheckoutService : ICheckoutService
 {
     private readonly IPriceRepository _priceRepository;
+    private readonly List<string> _basket = new();
 
     public CheckoutService(IPriceRepository priceRepository)
     {
@@ -11,11 +12,16 @@ public class CheckoutService : ICheckoutService
 
     public int GetTotalPrice()
     {
-        return 0;
+        var runningTotal = 0;
+     
+        foreach (var itemGroup in _basket.GroupBy(x => x).Select(x => (x.Key, x.Count())))
+            runningTotal += _priceRepository.GetStockItemRecord(itemGroup.Key)?.Price ?? 0 * itemGroup.Item2;
+
+        return runningTotal;
     }
 
     public void Scan(string item)
     {
-        throw new NotImplementedException();
+        _basket.Add(item);
     }
 }
