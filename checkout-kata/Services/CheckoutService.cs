@@ -1,4 +1,6 @@
-﻿namespace checkout_kata.Services;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace checkout_kata.Services;
 
 public class CheckoutService : ICheckoutService
 {
@@ -13,9 +15,16 @@ public class CheckoutService : ICheckoutService
     public int GetTotalPrice()
     {
         var runningTotal = 0;
-     
+
         foreach (var itemGroup in _basket.GroupBy(x => x).Select(x => (x.Key, x.Count())))
-            runningTotal += (_priceRepository.GetStockItemRecord(itemGroup.Key)?.Price ?? 0) * itemGroup.Item2;
+        {
+            runningTotal += _priceRepository.GetStockItemRecord(itemGroup.Key) switch
+            {
+                StockItemRecord i when i.OfferQuantity is null || i.OfferPrice is null => i.Price * itemGroup.Item2,
+                StockItemRecord i => (itemGroup.Item2 % i.OfferQuantity.Value * i.Price) + (itemGroup.Item2 / i.OfferQuantity.Value * i.OfferPrice.Value),
+                _ => 0
+            };
+        }
 
         return runningTotal;
     }

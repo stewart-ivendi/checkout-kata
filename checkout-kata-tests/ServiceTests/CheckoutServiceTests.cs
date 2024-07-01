@@ -23,7 +23,7 @@ public class CheckoutServiceTests
     }
 
     [Fact]
-    public void When_OneOfEachValidSkuInBasket_Then_ExpectedPrice_110()
+    public void When_OneOfEachValidSkuInBasket_Then_ExpectedPrice_115()
     {
         // ARRANGE
      
@@ -48,7 +48,7 @@ public class CheckoutServiceTests
 
         // ASSERT
 
-        cost.Should().Be(110);
+        cost.Should().Be(115);
     }
 
     [Theory]
@@ -106,10 +106,10 @@ public class CheckoutServiceTests
 
     #region data
 
-    private static StockItemRecord RecordA = new StockItemRecord { Sku = "A", Price = 50, OfferQuantity = 3, OfferPrice = 150 };
+    private static StockItemRecord RecordA = new StockItemRecord { Sku = "A", Price = 50, OfferQuantity = 3, OfferPrice = 130 };
     private static StockItemRecord RecordB = new StockItemRecord { Sku = "B", Price = 30, OfferQuantity = 2, OfferPrice = 45 };
     private static StockItemRecord RecordC = new StockItemRecord { Sku = "C", Price = 20 };
-    private static StockItemRecord RecordD = new StockItemRecord { Sku = "D", Price = 10 };
+    private static StockItemRecord RecordD = new StockItemRecord { Sku = "D", Price = 15 };
 
     #endregion
 }
